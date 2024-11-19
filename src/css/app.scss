@@ -1,1 +1,56 @@
-// app global css in SCSS form
+// global
+.letter-spacing-none {
+  letter-spacing: 0;
+}
+
+// dark overrrides
+.body--dark {
+  .bg-primary,
+  .q-layout__section--marginal {
+    background-color: $primary-dark !important;
+  }
+  .q-drawer {
+    border: none;
+  }
+}
+
+// Drawer nav
+.q-drawer {
+  .q-item {
+    opacity: 0.7;
+    &.q-router-link--exact-active {
+      opacity: 1;
+    }
+  }
+}
+
+// number inputs
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  margin-left: 10px;
+}
+
+// q-popup-edit_buttons
+.q-popup-edit_buttons {
+  text-transform: none;
+}
+
+// entries
+.entry {
+  .q-slide-item {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    .body--dark & {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    &:not(:first-child) {
+      margin-top: -1px;
+    }
+  }
+  .sortable-ghost {
+    opacity: 0;
+  }
+  .running-balance {
+    right: -5px;
+    bottom: -9px;
+  }
+}
