@@ -20,7 +20,7 @@ onMounted(() => {
 });
 
 // desativar o menu de contexto
-window.addEventListener("contextmenu", (e) => {
+/* window.addEventListener("contextmenu", (e) => {
   e.preventDefault();
-});
+}); */
 </script>

@@ -15,6 +15,9 @@
           <div class="absolute-center">
             <q-icon name="currency_exchange" />
             Money
+            <span v-if="clienteSelecionado.id">
+              - Cliente {{ clienteSelecionado.nome }}</span
+            >
           </div>
         </q-toolbar-title>
 
@@ -26,6 +29,7 @@
           no-caps
           dense
         />
+        <q-btn @click="logoff()" flat no-caps dense icon="logout" />
       </q-toolbar>
     </q-header>
 
@@ -51,16 +55,25 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import NavLink from "src/components/Nav/NavLink.vue";
 import { useStoreEntries } from "src/stores/storeEntries";
 import { useLightOrDark } from "src/use/useLightOrDark";
+import { useUserStore } from "src/stores/user-store";
+import { useRouter } from "vue-router";
+import { useStoreCliente } from "src/stores/storeCliente";
 
 defineOptions({
   name: "MainLayout",
 });
 
 const storeEntries = useStoreEntries();
+const userStore = useUserStore();
+const router = useRouter();
+const storeCliente = useStoreCliente();
+
+// Computed para acessar o estado do cliente selecionado
+const clienteSelecionado = computed(() => storeCliente.clienteSelecionado);
 
 const NavList = [
   {
@@ -73,6 +86,11 @@ const NavList = [
     icon: "settings",
     link: "/settings",
   },
+  {
+    title: "Clientes",
+    icon: "groups",
+    link: "/clientes",
+  },
 ];
 
 const leftDrawerOpen = ref(false);
@@ -80,4 +98,9 @@ const leftDrawerOpen = ref(false);
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
+
+const logoff = () => {
+  userStore.clearUser();
+  router.push("/auth");
+};
 </script>
